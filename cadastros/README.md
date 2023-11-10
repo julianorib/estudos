@@ -1,6 +1,6 @@
 # Sistema de Cadastro de Produtos
 
-Um projeto desenvolvido afim de testes, que tem uma página de Cadastro de Produtos e Visualização destes cadastros.\
+Um projeto desenvolvido afim de testes, tem uma página de Cadastro de Produtos e Visualização destes cadastros.\
 Este projeto é feito para utilizar Containers e ser implantado em um cluster Kubernetes.
 
 ## App PHP
