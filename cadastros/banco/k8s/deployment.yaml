@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bdcadastros-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels: 
+        app: mysql
+    spec:
+      containers:
+        - name: bdcadastros
+          image: julianorib/bdcadastros:v1.0
+          ports:
+            - containerPort: 3306

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: cadastros-deployment
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: cadastros
+  template: 
+    metadata:
+      labels:
+        app: cadastros
+    spec: 
+      containers:
+        - name: cadastros
+          image: julianorib/cadastros:v1.0
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          env: 
+           - name: SERVERNAME
+             value: "bdcadastros-service"
+           - name: DBNAME
+             value: "produtos"
+          envFrom:
+            - secretRef:
+                name: cadastros-secret
