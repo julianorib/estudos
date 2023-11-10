@@ -95,7 +95,6 @@ docker build -t seulogindocker/bdcadastros:v1.0 -f banco/Dockerfile banco/
 
 ### Subir a imagem para o Repositório
 
-Tenha uma conta no Docker Hub.
 
 <https://hub.docker.com/>
 
@@ -105,10 +104,10 @@ docker login
 ```
 
 ```
-docker push julianorib/cadastros:v1.0 
+docker push seulogindocker/cadastros:v1.0 
 ```
 ```
-docker push julianorib/bdcadastros:v1.0 
+docker push seulogindocker/bdcadastros:v1.0 
 ```
 
 ### Fazendo o Deply da aplicação no Kubernetes
