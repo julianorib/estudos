@@ -85,11 +85,11 @@ git clone
 Fazer o build das duas imagens personalizadas.
 
 ```
-docker build -t julianorib/cadastros:v1.0 -f app/Dockerfile app/
+docker build -t seulogindocker/cadastros:v1.0 -f app/Dockerfile app/
 ```
 
 ```
-docker build -t julianorib/bdcadastros:v1.0 -f banco/Dockerfile banco/
+docker build -t seulogindocker/bdcadastros:v1.0 -f banco/Dockerfile banco/
 
 ```
 
