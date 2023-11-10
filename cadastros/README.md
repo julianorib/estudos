@@ -4,6 +4,11 @@ Um projeto desenvolvido afim de testes, tem uma página de Cadastro de Produtos 
 Este projeto é feito para utilizar Containers e ser implantado em um cluster Kubernetes.
 
 ## App PHP
+
+```
+app\src\
+```
+
 - Página inicial 
 - Página de Visualização de Produtos.
 - Página de Cadastro de Produtos.
@@ -12,11 +17,13 @@ Este projeto é feito para utilizar Containers e ser implantado em um cluster Ku
     - USERNAME=root
     - PASSWORD=
     - DBNAME=produtos
-```
-app\src\
-```
 
 ### Dockerfile
+
+```
+app\Dockerfile
+```
+
 - Imagem base php:8.2-apache
 - Copia-se os arquivos do app
 - Instala o modulo para conexão com o BD
@@ -24,27 +31,43 @@ app\src\
 
 
 ### Manifestos K8s
+
+```
+app\k8s\
+```
+
 - Deployment
 - Service Load Balancer
 - Secret para user e senha do MySQL
 
 
 ## Banco MySQL
+
+```
+banco\src\
+```
+
 - Cria-se um database chamado produtos
 - Cria-se uma tabela chamada produtos
 - Cria-se os campos dessa tabela produtos
 
-```
-banco\src
-```
+
 
 ### Dockerfile
+
+```
+banco\Dockerfile
+```
 - Imagem base mysql
 - Copia o script de criação do database e tabela
 - Seta a senha do usuário root
 - Expoe a porta 3306
 
 ### Manifestos K8s
+
+```
+banco\k8s\
+```
 - Deployment
 - Service ClusterIP
 
