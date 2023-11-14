@@ -112,11 +112,11 @@ docker push seulogindocker/bdcadastros:v1.0
 
 ### Fazendo o Deply da aplicação no Kubernetes
 
-Executar os manifestos do Kubernetes
+Executar os manifestos do Kubernetes.\
+Dessa forma irá aplicar todos os manifestos de forma Recursiva na pasta atual.
 
 ```
-kubectl apply -R -f app/
-kubectl apply -R -f banco/
+kubectl apply -f . -R
 ```
 
 ### Verificar os Pods, Deployment e Services
