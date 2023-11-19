@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limite-container
+spec:
+  limits:
+    - max:
+        cpu: "1000m"
+        memory: "1000Mi"
+      min:
+        cpu: "100m"
+        memory: "32Mi"
+      default: ## quando não configurado no manifesto, esse é o Limit
+        cpu: "200m"
+        memory: "64Mi"
+      defaultRequest: ## quando não configurado no manifesto, esse é o Request
+        cpu: "100m"
+        memory: "32Mi"
+      type: Container

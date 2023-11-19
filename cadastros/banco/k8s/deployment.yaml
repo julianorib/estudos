@@ -16,3 +16,10 @@ spec:
           image: julianorib/bdcadastros:v1.0
           ports:
             - containerPort: 3306
+#          volumeMounts:
+#            - name: bdcadastros-data
+#              mountPath: /var/lib/mysql/data
+#      volumes:
+#        - name: bdcadastros-data
+#          PersistentVolumeClaim: 
+#            claimName: bdcadastros-pvc
