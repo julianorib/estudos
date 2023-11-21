@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard
+  storageClassName: nfs-client
   resources:
     requests:
-      storage: 100Mi
+      storage: 2Gi
