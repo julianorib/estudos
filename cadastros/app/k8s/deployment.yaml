@@ -14,7 +14,7 @@ spec:
     spec: 
       containers:
         - name: cadastros
-          image: julianorib/cadastros:v1.0
+          image: julianorib/cadastros:v1.2
           ports:
             - containerPort: 80
           imagePullPolicy: Always

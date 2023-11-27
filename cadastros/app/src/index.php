@@ -10,7 +10,7 @@
         <button onclick="window.location.href='produtos.php'">Visualizar Produtos</button>
         <br><br>
         <?php
-        echo "<p style='font-size: small;'>Host: " . $_SERVER['HTTP_HOST'] . "</p>";
+        echo gethostname();
         ?>
     </div>
 </body>
