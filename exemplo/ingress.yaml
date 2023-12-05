@@ -6,10 +6,28 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`exemplo.dev.unicoob.local`)
-      kind: Rule
-      services:
-      - name: nginx-service
-        port: 8080
-      middlewares:
-        - name: app-ratelimit
+  - kind: Rule
+    match: Host(`k8s.unicoob.local`)
+    middlewares:
+      - name: app-ratelimit
+    services:
+    - name: nginx-service
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-ingressroute-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match: Host(`k8s.unicoob.local`)
+    middlewares:
+      - name: app-ratelimit
+    services:
+    - name: nginx-service
+      port: 80
+  tls:
+    secretName: k8sunicoob-secret
