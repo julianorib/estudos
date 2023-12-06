@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-deploy
+spec: 
+  replicas: 5
+  selector: 
+    matchLabels:
+      app: nginx
+  strategy:
+    type: RollingUpdate   ## prove update de imagem quase sem downtime.
+    rollingUpdate:
+      maxSurge: 1         ## qtde acima do maximo replicas
+      maxUnavailable: 1   ## qtde abaixo da desejada de replicas
+  template:
+    metadata:
+      labels: 
+        app: nginx
+    spec: 
+      containers:
+        - name: nginx
+          image: nginx:1.23

@@ -6,6 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
+<<<<<<< HEAD:exemplo/ingress.yaml
   - kind: Rule
     match: Host(`k8s.unicoob.local`)
     middlewares:
@@ -31,3 +32,12 @@ spec:
       port: 80
   tls:
     secretName: k8sunicoob-secret
+=======
+    - match: Host(`exemplo.local`)
+      kind: Rule
+      services:
+      - name: nginx-service
+        port: 8080
+      middlewares:
+        - name: app-ratelimit
+>>>>>>> 52d6d32fdef6daa44fafdcee4f336201f90ca03f:exemplo-completo/ingress.yaml
