@@ -3,13 +3,8 @@
 - Deploy
 - Service Cluster IP
 - Ingress Route Traefik
-- Middleware Traefik
+- Middleware Rate Limit Traefik
 - Persistent Volume Claim
-
-
-Falta:
-
-- Resources Limits
 - HPA
 
 - Service Account
