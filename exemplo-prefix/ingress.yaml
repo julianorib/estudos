@@ -32,11 +32,11 @@ spec:
     - websecure
   routes:
   - kind: Rule
-    match: PathPrefix(`/nginx`)
+    match: PathPrefix(`/nginx`) 
     services:
     - name: nginx-service
       port: 80
     middlewares:
     - name: nginx-stripprefix
   tls:
-    secretName: k8sunicoob-secret
+    secretName: domain-secret
