@@ -14,6 +14,21 @@ spec:
       containers:
       - name: resource-container
         image: gcr.io/kubernetes-e2e-test-images/resource-consumer:1.5
+        livenessProbe:
+          httpGet:  ## Opções: httpGet, tcpSocker, Exec
+            path: /health
+            port: 8080
+            scheme: HTTP
+        readnessProbe:
+          httpGet:  ## Opções: httpGet, tcpSocker, Exec
+            path: /ready
+            port: 8080
+            scheme: HTTP
+        startupProbe:
+          httpGet:  ## Opções: httpGet, tcpSocker, Exec
+            path: /health
+            port: 8080
+            scheme: HTTP            
         resources: 
           requests:
             memory: "32Mi"
