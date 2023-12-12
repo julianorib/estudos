@@ -1,4 +1,13 @@
 apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nginx-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /nginx
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: nginx-ingressroute
@@ -7,10 +16,12 @@ spec:
     - web
   routes:
   - kind: Rule
-    match: PathPrefix(`/`)
+    match: PathPrefix(`/nginx`)
     services:
     - name: nginx-service
       port: 80
+    middlewares:
+    - name: nginx-stripprefix
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -21,9 +32,11 @@ spec:
     - websecure
   routes:
   - kind: Rule
-    match: PathPrefix(`/`)
+    match: PathPrefix(`/nginx`)
     services:
     - name: nginx-service
       port: 80
+    middlewares:
+    - name: nginx-stripprefix
   tls:
-    secretName: domain-secret
+    secretName: unicoob-secret
