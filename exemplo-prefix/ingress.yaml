@@ -39,4 +39,4 @@ spec:
     middlewares:
     - name: nginx-stripprefix
   tls:
-    secretName: sicoobunicoob-secret
+    secretName: domimio-secret
