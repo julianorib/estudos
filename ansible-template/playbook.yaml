@@ -1,0 +1,7 @@
+- name: Template Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Template templates
+      ansible.builtin.template:
+        src: ./deploy.yaml
+        dest: ./deployN.yaml
