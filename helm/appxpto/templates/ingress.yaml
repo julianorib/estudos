@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name}}-nginx-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+  - kind: Rule
+    match: {{ .Values.nginx.dns }}  PathPrefix(`/`)
+    services:
+    - name: {{ .Release.Name}}-nginx-service
+      port: 80

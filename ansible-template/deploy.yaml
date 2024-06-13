@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: {{ aplicacao }}-deploy
+spec: 
+  replicas: 4
+  selector: 
+    matchLabels:
+      app: {{ aplicacao }}
+  template:
+    metadata:
+      labels: 
+        app: {{ aplicacao }}
+    spec: 
+      containers:
+        - name: {{ aplicacao }}
+          image: {{ imagem }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 2
+            periodSeconds: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ aplicacao }}-service
+spec:
+  selector:
+    app: {{ aplicacao }}
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
