@@ -1,0 +1,15 @@
+volume:
+  name: www-data
+  path: /var/www/html
+Repo: registry.xpto/nginx:v1.0
+vars1:
+  name:
+  valor: xpto
+vars:
+ chave1: valor1
+ chave2: valor2
+ chave3: valor3
+secrets:
+ chave1: valor1
+ chave2: valor2
+ chave3: valor3

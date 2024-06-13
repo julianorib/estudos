@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: {{ .Release.Name }}-deploy
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels: 
+        app: {{ .Release.Name }}
+    spec: 
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.Repo }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-configmap
+            - secretRef:
+                name: {{ .Release.Name }}-secret
+          resources: 
+            requests:
+              memory: "32Mi"
+              cpu: "100m"
+            limits:
+              memory: "32Mi"
+              cpu: "100m"
+          {{- if empty .Values.volume.name }}
+          {{- else }}
+          volumeMounts:
+            - name: {{ .Values.volume.name }}
+              mountPath: {{ .Values.volume.path }}
+      volumes:
+        - name: {{ .Values.volume.name }}
+          persistentVolumeClaim: 
+            claimName: {{ .Release.Name }}-pvc
+            {{- end }}
