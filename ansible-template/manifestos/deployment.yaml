@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ aplicacao }}
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ aplicacao }}
+  template:
+    metadata:
+      labels:
+        app: {{ aplicacao }}
+      name: {{ aplicacao }}
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: {{ aplicacao }}
+        image: {{ imagem }}
+        envFrom:
+          - configMapRef:
+              name: {{ aplicacao }}-configmap
+          - secretRef:
+              name: {{ aplicacao }}-secret
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: 0.5
+          limits:
+            memory: "500Mi"
+            cpu: 0.5
+        volumeMounts:
+        - name: {{ aplicacao }}-volume
+          mountPath: /var/www
+      volumes:
+        - name: {{ aplicacao }}-volume
+          persistentVolumeClaim: 
+            claimName: {{ aplicacao }}-pvc

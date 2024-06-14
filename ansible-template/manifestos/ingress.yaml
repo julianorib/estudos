@@ -1,0 +1,32 @@
+## Criando um Ingressroute
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ aplicacao }}-ingressroute
+  namespace: {{ namespace }}
+spec:
+  entryPoints:
+    - web
+  routes:
+  - kind: Rule
+    match: Host(`{{ dns }}`) && PathPrefix(`/`)
+    services:
+    - name: {{ aplicacao }}-service
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ aplicacao }}-ingressroute-tls
+  namespace: {{ namespace }}
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match: Host(`{{ dns }}`) && PathPrefix(`/`)
+    services:
+    - name: {{ aplicacao }}-service
+      port: 80
+  tls:
+    secretName: unicoob-secret

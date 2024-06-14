@@ -1,7 +1,39 @@
 - name: Template Kubernetes
   hosts: localhost
+  vars_files:
+    - vars.yaml
   tasks:
-    - name: Template templates
+    - name: Criar pasta da aplicação
+      ansible.builtin.file:
+        path: ./{{ aplicacao }}
+        state: directory
+
+    - name: Deployment
       ansible.builtin.template:
-        src: ./deploy.yaml
-        dest: ./deployN.yaml
+        src: ./manifestos/deployment.yaml
+        dest: ./{{ aplicacao }}/deployment.yaml
+
+    - name: ConfigMap
+      ansible.builtin.template:
+        src: ./manifestos/configmap.yaml
+        dest: ./{{ aplicacao }}/configmap.yaml
+
+    - name: Ingress
+      ansible.builtin.template:
+        src: ./manifestos/ingress.yaml
+        dest: ./{{ aplicacao }}/ingress.yaml
+
+    - name: Persistent Volume Clain
+      ansible.builtin.template:
+        src: ./manifestos/pvc.yaml
+        dest: ./{{ aplicacao }}/pvc.yaml
+
+    - name: Secrets
+      ansible.builtin.template:
+        src: ./manifestos/secret.yaml
+        dest: ./{{ aplicacao }}/secret.yaml
+
+    - name: Service
+      ansible.builtin.template:
+        src: ./manifestos/service.yaml
+        dest: ./{{ aplicacao }}/service.yaml

@@ -1,2 +1,4 @@
-aplicacao: xpto
-imagem: julianorib/teste:v1
+aplicacao: nginx
+namespace: temp
+imagem: docker.com/nginx:v1.0
+dns: appx.domain.local
