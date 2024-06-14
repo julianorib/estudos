@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: {{ .Release.Name }}-deploy
+  namespace: {{ .Values.namespace }}
 spec: 
-  replicas: 3
+  replicas: {{ .Values.replicas }}
   selector: 
     matchLabels:
       app: {{ .Release.Name }}
@@ -14,7 +15,7 @@ spec:
     spec: 
       containers:
         - name: {{ .Release.Name }}
-          image: {{ .Values.Repo }}
+          image: {{ .Values.imagem }}
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmap
@@ -22,11 +23,11 @@ spec:
                 name: {{ .Release.Name }}-secret
           resources: 
             requests:
-              memory: "32Mi"
-              cpu: "100m"
+              memory: "{{ .Values.memory }}"
+              cpu: "{{ .Values.cpu }}"
             limits:
-              memory: "32Mi"
-              cpu: "100m"
+              memory: "{{ .Values.memory }}"
+              cpu: "{{ .Values.cpu }}"
           {{- if empty .Values.volume.name }}
           {{- else }}
           volumeMounts:

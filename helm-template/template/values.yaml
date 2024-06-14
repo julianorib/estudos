@@ -1,10 +1,17 @@
+namespace: sistemas
+imagem: registry.xpto/nginx:v1.0
+targetport: 80
+replicas: 2
+memory: 100Mi
+cpu: 0.5
 volume:
-  name: www-data
+  name: 
   path: /var/www/html
-Repo: registry.xpto/nginx:v1.0
-vars1:
-  name:
-  valor: xpto
+  tamanho: 100Mi
+ingress:
+  host: xpto.unicoob.local
+  path: /sistema
+  tls: unicoob-secret
 vars:
  chave1: valor1
  chave2: valor2
