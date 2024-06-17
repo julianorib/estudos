@@ -1,4 +1,4 @@
-namespace: sistemas
+namespace: infraestrutura
 imagem: registry.xpto/nginx:v1.0
 targetport: 80
 replicas: 2
@@ -9,9 +9,9 @@ volume:
   path: /var/www/html
   tamanho: 100Mi
 ingress:
-  host: xpto.unicoob.local
+  host: app.domain.xpto
   path: /sistema
-  tls: unicoob-secret
+  tls: cert-ssl
 vars:
  chave1: valor1
  chave2: valor2
