@@ -1,0 +1,54 @@
+## Este pipeline só faz o deploy das aplicações no Cluster Kubernetes de Homologação
+## Para isto, deve alterar a variável $DEPLOY_PROD para yes e fazer o merge no Gitlab.
+
+variables:
+  DEPLOY_PROD: "yes"
+
+stages:
+    - build
+    - test
+    - deploy
+
+Build:
+      stage: build
+      script:
+        - echo "Build da aplicação"
+      only:
+        - homol
+
+Test:
+      stage: test
+      needs: ["Build"]
+      script:
+        - echo "Teste da aplicação"
+      only:
+        - homol
+
+# Deploy:
+#       stage: deploy
+#       rules:
+#       - if: $DEPLOY_PROD == "yes" && $CI_COMMIT_BRANCH == "main"
+#         when: manual
+#       image: 
+#         name: bitnami/kubectl
+#         entrypoint: [""]
+#       before_script:
+#         - export KUBECONFIG=$KUBEHOMOL
+#       script:
+#         - kubectl apply -f glpi/ -n temp
+
+Deploy:
+      stage: deploy
+      rules:
+      - if: $DEPLOY_PROD == "yes" && $CI_COMMIT_BRANCH == "main"
+        when: always
+      image: 
+        name: alpine/helm
+        entrypoint: [""]
+      before_script:
+        - export KUBECONFIG=$KUBEHOMOL
+      script:
+        - helm repo add template --username $TEMPLATE_USER --password $TEMPLATE_TOKEN $TEMPLATE_API --ca-file $CA
+        - helm repo update
+        - helm upgrade --install teste template/template --values teste/values.yaml -n temp --ca-file $CA
+        
